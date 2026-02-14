@@ -1,0 +1,73 @@
+# Ablation study configuration - Baseline without adaptive filters
+
+# Data settings
+data:
+  dataset_name: "tox21"
+  split_ratio: [0.8, 0.1, 0.1]
+  batch_size: 32
+  num_workers: 4
+  featurizer: "GraphConv"
+
+# Model architecture - Baseline without adaptive components
+model:
+  hidden_dim: 128
+  num_layers: 4
+  num_spectral_filters: 16
+  num_eigenvectors: 20
+  dropout: 0.3
+  pooling: "mean"
+  use_adaptive_filters: false  # Disable adaptive filters
+  use_attention: false  # Disable attention mechanism
+
+# Training settings
+training:
+  num_epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  gradient_clip: 1.0
+  early_stopping_patience: 15
+  checkpoint_dir: "checkpoints_baseline"
+  use_curriculum: false  # Disable curriculum learning
+  curriculum_epochs: 0
+
+# Curriculum learning (disabled)
+curriculum:
+  start_ratio: 1.0
+  end_ratio: 1.0
+  difficulty_metric: "graph_edit_distance"
+  num_centroids: 10
+
+# Loss function - Standard multi-task loss
+loss:
+  type: "uncertainty_weighted_multitask"
+  initial_task_weights: 1.0
+  learn_task_weights: false  # Disable learned task weights
+  uncertainty_regularization: 0.0
+
+# Optimizer and scheduler
+optimizer:
+  type: "adamw"
+  betas: [0.9, 0.999]
+  eps: 0.00000001
+
+scheduler:
+  type: "cosine"
+  t_max: 100
+  eta_min: 0.000001
+  warmup_epochs: 10
+
+# Reproducibility
+seed: 42
+
+# Logging
+logging:
+  use_mlflow: true
+  experiment_name: "baseline_spectral_gnn"
+  log_every_n_steps: 10
+  save_every_n_epochs: 5
+
+# Evaluation
+evaluation:
+  metrics: ["auc_roc", "auc_pr", "accuracy", "f1_score"]
+  per_task_metrics: true
+  calibration_bins: 10
