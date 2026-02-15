@@ -34,14 +34,7 @@ ENV/
 *~
 
 # Jupyter Notebook
-.ipynb_checkpoints
-
-# Data (raw/processed, not configs)
-data/raw/
-data/processed/
-*.pkl
-*.h5
-*.hdf5
+.ipynb_checkpoints/
 
 # MLflow
 mlruns/
@@ -67,3 +60,7 @@ htmlcov/
 
 # Environment variables
 .env
+
+# Data (raw/processed)
+data/raw/
+data/processed/
