@@ -1,0 +1,42 @@
+{
+  "project": "Adaptive Spectral-Temporal GNN for Molecular Toxicity Prediction",
+  "dataset": "Tox21",
+  "model": {
+    "hidden_dim": 128,
+    "num_layers": 4,
+    "num_spectral_filters": 16,
+    "num_eigenvectors": 20,
+    "dropout": 0.3,
+    "pooling": "mean",
+    "use_adaptive_filters": true,
+    "use_attention": true
+  },
+  "training": {
+    "total_epochs_trained": 70,
+    "early_stopping_epoch": 54,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "scheduler": "cosine",
+    "curriculum_learning": true,
+    "curriculum_epochs": 30,
+    "seed": 42
+  },
+  "best_metrics": {
+    "best_val_auc_roc": 0.8117,
+    "best_val_auc_epoch": 54,
+    "best_val_loss": -0.6279
+  },
+  "final_metrics": {
+    "final_val_auc_roc": 0.8081,
+    "final_train_loss": -0.7011,
+    "final_val_loss": -0.5954
+  },
+  "training_progression": {
+    "initial_train_loss": 0.1901,
+    "final_train_loss": -0.7011,
+    "initial_val_loss": 0.1278,
+    "final_val_loss": -0.5954,
+    "initial_val_auc": 0.7045,
+    "best_val_auc": 0.8117
+  }
+}
